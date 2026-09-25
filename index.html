@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máquina de Suplementos em AR</title>
+<style>
+  :root{--bg:#15181b;--card:#1e2226;--ink:#e9ecef;--muted:#9aa3ad;--line:#30363c;--accent:#f07a2a;color-scheme:dark}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,sans-serif}
+  main{max-width:520px;margin:0 auto;padding:28px 16px 48px;display:grid;gap:16px}
+  h1{font-size:28px;line-height:1.1;margin:0}
+  p{margin:0;color:var(--muted)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px}
+  .card h2{font-size:17px;margin:0}
+  a.btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#15181b;
+        font-weight:600;text-decoration:none;border-radius:10px;padding:14px}
+  a.btn img{width:1px;height:1px;opacity:0;position:absolute}
+  .mono{font-family:ui-monospace,monospace;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Máquina de Suplementos em AR</h1>
+  <p>Toque no botão, aponte a câmera para o chão e posicione a máquina. Ela aparece em tamanho real.</p>
+
+  <section class="card">
+    <h2>Frente de 0,57 m</h2>
+    <div class="mono">A 1,94 · L 0,57 · P 0,79 m</div>
+    <a class="btn" data-file="maquina-57x79">Ver no meu espaço</a>
+  </section>
+
+  <section class="card">
+    <h2>Frente de 0,79 m</h2>
+    <div class="mono">A 1,94 · L 0,79 · P 0,57 m</div>
+    <a class="btn" data-file="maquina-79x57">Ver no meu espaço</a>
+  </section>
+
+  <p id="hint"></p>
+</main>
+<script>
+  const base = location.href.replace(/[^/]*$/, '');
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  document.querySelectorAll('a.btn').forEach(a => {
+    const f = a.dataset.file;
+    if (ios) {
+      a.href = f + '.usdz#allowsContentScaling=0';
+      a.rel = 'ar';
+      const img = document.createElement('img'); img.alt = ''; img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+      a.prepend(img);
+    } else {
+      const file = encodeURIComponent(base + f + '.glb');
+      a.href = 'https://arvr.google.com/scene-viewer/1.0?file=' + file +
+               '&mode=ar_only&resizable=false&title=' + encodeURIComponent('Máquina de suplementos');
+    }
+  });
+  document.getElementById('hint').textContent = ios
+    ? 'No iPhone, abra pelo Safari.'
+    : 'No Android, abra pelo Chrome. Se pedir, instale o Google Play Services for AR.';
+</script>
+</body>
+</html>
