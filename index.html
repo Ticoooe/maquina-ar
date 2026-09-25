@@ -46,12 +46,15 @@
     if (ios) {
       a.href = f + '.usdz#allowsContentScaling=0';
       a.rel = 'ar';
-      const img = document.createElement('img'); img.alt = ''; img.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+      const img = document.createElement('img'); img.alt = ''; img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
       a.prepend(img);
     } else {
+      // Chrome no Android só abre o Scene Viewer via intent; o link https puro cai numa página web.
       const file = encodeURIComponent(base + f + '.glb');
-      a.href = 'https://arvr.google.com/scene-viewer/1.0?file=' + file +
-               '&mode=ar_only&resizable=false&title=' + encodeURIComponent('Máquina de suplementos');
+      a.href = 'intent://arvr.google.com/scene-viewer/1.0?file=' + file +
+               '&mode=ar_only&resizable=false&title=' + encodeURIComponent('Máquina de suplementos') +
+               '#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;' +
+               'S.browser_fallback_url=' + file + ';end;';
     }
   });
   document.getElementById('hint').textContent = ios
