@@ -24,15 +24,9 @@
   <p>Toque no botão, aponte a câmera para o chão e posicione a máquina. Ela aparece em tamanho real.</p>
 
   <section class="card">
-    <h2>Frente de 0,43 m</h2>
+    <h2>Máquina RE FLOW</h2>
     <div class="mono">A 1,70 · L 0,43 · P 0,58 m</div>
-    <a class="btn" data-file="maquina-43x58">Ver no meu espaço</a>
-  </section>
-
-  <section class="card">
-    <h2>Frente de 0,58 m</h2>
-    <div class="mono">A 1,70 · L 0,58 · P 0,43 m</div>
-    <a class="btn" data-file="maquina-58x43">Ver no meu espaço</a>
+    <a class="btn" data-file="maquina">Ver no meu espaço</a>
   </section>
 
   <p id="hint"></p>
@@ -52,7 +46,7 @@
       // Chrome no Android só abre o Scene Viewer via intent; o link https puro cai numa página web.
       const file = encodeURIComponent(base + f + '.glb');
       a.href = 'intent://arvr.google.com/scene-viewer/1.0?file=' + file +
-               '&mode=ar_only&resizable=false&title=' + encodeURIComponent('Máquina de suplementos') +
+               '&mode=ar_only&resizable=false&title=' + encodeURIComponent('Máquina RE FLOW') +
                '#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;' +
                'S.browser_fallback_url=' + file + ';end;';
     }
